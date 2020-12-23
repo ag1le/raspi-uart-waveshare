@@ -484,13 +484,13 @@ class EPaper(object):
         So the EPaper class can be used in a with clause and
         handle cleaning up the GPIO stuff on exit.  It returns itself.
         '''
-        paper.send(Handshake())
+        self.send(Handshake())
         time.sleep(2)
-        paper.send(SetPallet(SetPallet.BLACK, SetPallet.WHITE))
-        #paper.send(SetCurrentDisplayRotation(SetCurrentDisplayRotation.FLIP))
-        paper.send(SetEnFontSize(SetEnFontSize.THIRTYTWO))
-        paper.send(SetZhFontSize(SetZhFontSize.THIRTYTWO))
-        paper.read_responses(timeout=10)
+        self.send(SetPallet(SetPallet.BLACK, SetPallet.WHITE))
+        #self.send(SetCurrentDisplayRotation(SetCurrentDisplayRotation.FLIP))
+        self.send(SetEnFontSize(SetEnFontSize.THIRTYTWO))
+        self.send(SetZhFontSize(SetZhFontSize.THIRTYTWO))
+        self.read_responses(timeout=10)
         return self
 
     def __exit__(self ,type, value, traceback):
@@ -498,8 +498,8 @@ class EPaper(object):
         Invokes the GPIO.cleanup() method.  If that's not a desired behavior,
         don't use the with clause.
         '''
-        paper.send(RefreshAndUpdate())
-        paper.read_responses()
+        self.send(RefreshAndUpdate())
+        self.read_responses()
         GPIO.cleanup()
 
 

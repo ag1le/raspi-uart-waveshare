@@ -208,6 +208,7 @@ class SetCurrentDisplayRotation(Command):
     NORMAL = b'\x00'
     FLIP = b'\x01'
     FLIPB = b'\x02' # depending on firmware, value could be this...
+    FLIP270 = b'\x03'
     def __init__(self, rotation=NORMAL):
         super().__init__( SetCurrentDisplayRotation.COMMAND, rotation)
 
@@ -419,12 +420,23 @@ class ClearScreen(Command):
     RESPONSE_BYTES = 2
 
 
+class DrawLine(Command):
+    '''
+    From the wiki:
+    Draw a line 
+    '''
+    COMMAND = b'\x22'
+    RESPONSE_BYTES = 2
+    def __init__(self, x0, y0, x1, y1):
+        super().__init__(self.COMMAND, struct.pack(">HHHH", x0, y0, x1, y1))
+
 ###############################################################################
 # Epaper object
 ###############################################################################
 
 # These correspond to the board pins used on the PI3:
-PORT_DEVICE = "/dev/ttyAMA0"
+#PORT_DEVICE = "/dev/ttyAMA0"
+PORT_DEVICE = "/dev/ttyS0"
 PIN_RESET = 3
 PIN_WAKEUP = 7
 
@@ -526,8 +538,8 @@ class EPaper(object):
         start_time = time.time()
         self.serial.timeout = timeout
         b = self.serial.read(size)
-        #print("read took %0.2f seconds. expected: %d got: %d data: %s" % (
-        #    time.time() - start_time, size, len(b), b.hex()))
+        print("read took %0.2f seconds. expected: %d got: %d data: %s" % (
+            time.time() - start_time, size, len(b), b.hex()))
         return b
 
     def read_responses(self, timeout=3):
@@ -535,8 +547,8 @@ class EPaper(object):
             print("no response expected")
             return
         start_time = time.time()
-        #print("reading expected response bytes: %d" % self.bytes_expected)
+        print("reading expected response bytes: %d" % self.bytes_expected)
         b = self.read(size=self.bytes_expected, timeout=timeout)
-        #print("read: %d, read time: %0.2f" % (len(b),
-        #                                      time.time() - start_time))
+        print("read: %d, read time: %0.2f" % (len(b),
+                                              time.time() - start_time))
         self.bytes_expected -= len(b)

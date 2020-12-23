@@ -1,3 +1,10 @@
+NOTE
+----
+This repo is forked from https://github.com/jarret/raspi-uart-waveshare 
+I added a capability to plot graphs (like temperature or humidity values) on [WaveShare 4.3 inch e-paper display](https://www.amazon.com/Waveshare-4-3inch-Resolution-Interface-Electronic/dp/B00VV5IMN0).
+
+
+
 Overview
 ------
 This library is an improvement and extension of [this repository](https://github.com/not-a-bird/waveshare-epaper-uart).  It is meant to work under Python3+ for the Raspberry Pi's GPIO output.
@@ -70,7 +77,7 @@ For the Twisted event loop examples, `twisted` will need to be installed.
 
 Examples
 --------
-[test_plot.py](test_plot.py) This plots a graph of value on the screen, using matplotlib.pyplot type plot() interface. 
+[test_plot.py](test_plot.py) This plots a graph of values on the screen, using matplotlib.pyplot type plot() interface. 
 ![test_plot.py](img/plot_epaper.jpg)
 
 [test_basic.py](test_basic.py) This draws some basic text and shapes on the screen in different greyscale colors. Intended as a basic smoke test for the libary and doesn't depend on the QR Code and twisted libraries.

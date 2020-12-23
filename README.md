@@ -1,6 +1,6 @@
 NOTE
 ----
-This repo is forked from https://github.com/jarret/raspi-uart-waveshare 
+This repo is forked from https://github.com/jarret/raspi-uart-waveshare .  
 I added a capability to plot graphs (like temperature or humidity values) on [WaveShare 4.3 inch e-paper display](https://www.amazon.com/Waveshare-4-3inch-Resolution-Interface-Electronic/dp/B00VV5IMN0).
 
 

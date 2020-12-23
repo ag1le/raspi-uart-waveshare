@@ -547,17 +547,17 @@ class EPaper(object):
         start_time = time.time()
         self.serial.timeout = timeout
         b = self.serial.read(size)
-        print("read took %0.2f seconds. expected: %d got: %d data: %s" % (
-            time.time() - start_time, size, len(b), b.hex()))
+        #print("read took %0.2f seconds. expected: %d got: %d data: %s" % (
+        #    time.time() - start_time, size, len(b), b.hex()))
         return b
 
     def read_responses(self, timeout=3):
         if self.bytes_expected == 0:
-            print("no response expected")
+            #print("no response expected")
             return
         start_time = time.time()
-        print("reading expected response bytes: %d" % self.bytes_expected)
+        #print("reading expected response bytes: %d" % self.bytes_expected)
         b = self.read(size=self.bytes_expected, timeout=timeout)
-        print("read: %d, read time: %0.2f" % (len(b),
-                                              time.time() - start_time))
+        #print("read: %d, read time: %0.2f" % (len(b),
+        #                                      time.time() - start_time))
         self.bytes_expected -= len(b)

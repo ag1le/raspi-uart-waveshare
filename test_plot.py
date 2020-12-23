@@ -31,11 +31,12 @@ class Plot():
 
     def __init__(self, paper):
         self.paper = paper
-        self.shim =16 
+        self.shim =16  #shim value to let a margin of edge pixels - not to exceed 800x600 size display 
         box = self.rect(0+self.shim,0+self.shim,800-self.shim,600-self.shim)
         self.paper.send(DrawRectangle(box.x0,box.y0,box.x1,box.y1))
 
     def rect(self, x0, y0, x1, y1):
+        """rectangle to plot the values in"""
         self.x0 = x0
         self.x1 = x1
         self.y0 = y0
@@ -104,14 +105,6 @@ values = [23,18,0,26,26,32,31,28,27,26,24,23,23]
 def main():
     with EPaper() as paper:
 
-        paper.send(Handshake())
-        time.sleep(2)
-        paper.send(SetPallet(SetPallet.BLACK, SetPallet.WHITE))
-        #paper.send(SetCurrentDisplayRotation(SetCurrentDisplayRotation.FLIP))
-        paper.send(SetEnFontSize(SetEnFontSize.THIRTYTWO))
-        paper.send(SetZhFontSize(SetZhFontSize.THIRTYTWO))
-        paper.read_responses(timeout=10)
-
         plt = Plot(paper)
         plt.plot(values)
         plt.xticks()
@@ -120,8 +113,7 @@ def main():
         print("labels:", lbls)
         plt.yticks(labels=lbls)
 
-        paper.send(RefreshAndUpdate())
-        paper.read_responses()
+
 
 
 if __name__ == '__main__':

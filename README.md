@@ -70,6 +70,8 @@ For the Twisted event loop examples, `twisted` will need to be installed.
 
 Examples
 --------
+[test_plot.py](test_plot.py) This plots a graph of value on the screen, using matplotlib.pyplot type plot() interface. 
+![test_plot.py](img/plot_epaper.jpg)
 
 [test_basic.py](test_basic.py) This draws some basic text and shapes on the screen in different greyscale colors. Intended as a basic smoke test for the libary and doesn't depend on the QR Code and twisted libraries.
 
